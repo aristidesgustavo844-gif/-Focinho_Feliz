@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focinho Feliz — Pet Shop, Banho & Tosa e Day Care em Parelheiros</title>
+<meta name="description" content="Focinho Feliz: banho, tosa, day care, pet shop e cuidado veterinário parceiro em Parelheiros, São Paulo. Agende pelo WhatsApp.">
+<link rel="icon" type="image/png" href="focinho-feliz-logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#FFFBF3;
+    --ink:#20261F;
+    --forest:#2F4B3C;
+    --coral:#FF7A59;
+    --turquoise:#2FA6A0;
+    --mustard:#F2B441;
+    --line:#20261F;
+    --card:#FFFFFF;
+    --radius-blob: 42% 58% 61% 39% / 47% 41% 59% 53%;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:100px;
+    border:2.5px solid var(--ink);
+    font-weight:600; font-size:0.95rem;
+    cursor:pointer; transition:transform .18s ease, box-shadow .18s ease;
+    background:var(--card);
+  }
+  .btn:hover{ transform:translateY(-3px); box-shadow:5px 5px 0 var(--ink); }
+  .btn-primary{ background:var(--coral); color:var(--ink); }
+  .btn-dark{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+  .btn-dark:hover{ box-shadow:5px 5px 0 var(--coral); }
+
+  .eyebrow{
+    display:inline-block; font-family:'Fredoka'; font-weight:600;
+    background:var(--mustard); border:2px solid var(--ink);
+    padding:5px 14px; border-radius:100px; font-size:0.8rem;
+    transform:rotate(-2deg);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--cream); border-bottom:2.5px solid var(--ink);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; }
+  .logo{ font-family:'Fredoka'; font-weight:700; font-size:1.4rem; display:flex; align-items:center; gap:10px; cursor:pointer; }
+  .logo span{ color:var(--coral); }
+  .logo-img{ width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid var(--ink); transition:transform .2s ease; }
+  .logo:hover .logo-img{ transform:rotate(-8deg) scale(1.06); }
+  footer .logo-img{ width:40px; height:40px; }
+  .nav-links{ display:flex; gap:32px; font-weight:600; font-size:0.95rem; }
+  .nav-links a{ position:relative; }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:3px;
+    background:var(--coral); transition:width .2s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ display:flex; align-items:center; gap:18px; }
+  .burger{ display:none; font-size:1.6rem; background:none; border:none; cursor:pointer; }
+
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .burger{ display:block; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; padding:70px 0 90px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(47,166,160,0.18), transparent 45%),
+      radial-gradient(circle at 10% 85%, rgba(242,180,65,0.25), transparent 40%);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;
+  }
+  .hero h1{ font-size:clamp(2.4rem, 4.6vw, 3.8rem); line-height:1.06; }
+  .hero h1 em{ font-style:normal; color:var(--coral); }
+  .hero p.lead{ margin-top:22px; font-size:1.12rem; line-height:1.6; color:#4A4F45; max-width:460px; }
+  .hero-actions{ display:flex; gap:16px; margin-top:34px; flex-wrap:wrap; }
+  .hero-stats{ display:flex; gap:34px; margin-top:46px; }
+  .hero-stats div strong{ display:block; font-family:'Fredoka'; font-size:1.7rem; }
+  .hero-stats div span{ font-size:0.82rem; color:#5b6155; }
+
+  .hero-art{ position:relative; }
+  .blob-frame{
+    position:relative; border-radius:var(--radius-blob);
+    overflow:hidden; border:3px solid var(--ink);
+    box-shadow:10px 10px 0 var(--forest);
+    aspect-ratio:1/1;
+  }
+  .blob-frame img{ width:100%; height:100%; object-fit:cover; }
+  .stamp{
+    position:absolute; bottom:-18px; left:-18px;
+    background:var(--cream); border:2.5px dashed var(--ink);
+    border-radius:50%; width:118px; height:118px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-family:'Fredoka'; font-weight:600; font-size:0.78rem;
+    transform:rotate(-8deg);
+  }
+  .float-paw{
+    position:absolute; font-size:2rem; opacity:0.85;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0) rotate(0deg);} 50%{ transform:translateY(-14px) rotate(8deg);} }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:340px; margin:0 auto; }
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--ink); color:var(--cream); padding:14px 0;
+    overflow:hidden; white-space:nowrap; border-top:2.5px solid var(--ink); border-bottom:2.5px solid var(--ink);
+  }
+  .marquee-track{ display:inline-flex; gap:40px; animation:scroll 26s linear infinite; font-family:'Fredoka'; font-weight:500; }
+  .marquee-track span{ font-size:1rem; }
+  @keyframes scroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:96px 0; }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(1.9rem,3.4vw,2.6rem); margin-top:14px; }
+  .section-head p{ margin-top:14px; color:#4A4F45; line-height:1.6; }
+
+  .fade-up{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+  .fade-up.in{ opacity:1; transform:translateY(0); }
+
+  /* services */
+  .services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .service-card{
+    background:var(--card); border:2.5px solid var(--ink); border-radius:24px;
+    padding:28px 22px; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .service-card:hover{ transform:translateY(-6px); box-shadow:7px 7px 0 var(--turquoise); }
+  .service-card .icon{
+    width:56px; height:56px; border-radius:16px; background:var(--mustard);
+    border:2px solid var(--ink); display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; margin-bottom:16px;
+  }
+  .service-card h3{ font-size:1.15rem; }
+  .service-card p{ margin-top:8px; font-size:0.92rem; color:#565b51; line-height:1.55; }
+  .service-card .price{ margin-top:14px; font-family:'Fredoka'; font-weight:600; color:var(--coral); }
+
+  @media (max-width:980px){ .services-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .services-grid{ grid-template-columns:1fr;} }
+
+  /* como funciona */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .step{ position:relative; padding-top:10px; }
+  .step .n{
+    font-family:'Fredoka'; font-weight:700; font-size:1rem;
+    width:38px; height:38px; border-radius:50%; border:2.5px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; background:var(--turquoise); color:var(--cream);
+    margin-bottom:16px;
+  }
+  .step h3{ font-size:1.1rem; }
+  .step p{ margin-top:8px; color:#565b51; font-size:0.92rem; line-height:1.55; }
+  @media (max-width:800px){ .steps{ grid-template-columns:1fr;} }
+
+  /* galeria */
+  .gallery-strip{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .gallery-strip img{
+    width:100%; height:220px; object-fit:cover; border-radius:20px;
+    border:2.5px solid var(--ink);
+  }
+  .gallery-strip a:nth-child(2){ margin-top:24px; }
+  .gallery-strip a:nth-child(4){ margin-top:-24px; }
+  @media (max-width:980px){ .gallery-strip{ grid-template-columns:repeat(3,1fr);} .gallery-strip a:nth-child(4),.gallery-strip a:nth-child(5){display:none;} }
+  @media (max-width:560px){ .gallery-strip{ grid-template-columns:repeat(2,1fr);} }
+
+  /* depoimentos */
+  .testi-wrap{ background:var(--forest); border-radius:32px; padding:64px 40px; color:var(--cream); }
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .testi-card{
+    background:rgba(255,251,243,0.06); border:1.5px solid rgba(255,251,243,0.25);
+    border-radius:20px; padding:26px;
+  }
+  .testi-card .stars{ color:var(--mustard); letter-spacing:2px; margin-bottom:12px; }
+  .testi-card p{ font-size:0.95rem; line-height:1.6; opacity:0.92; }
+  .testi-card .who{ margin-top:16px; font-family:'Fredoka'; font-weight:600; font-size:0.9rem; }
+  @media (max-width:900px){ .testi-grid{ grid-template-columns:1fr;} .testi-wrap{ padding:44px 22px; } }
+
+  /* CTA final */
+  .cta-final{
+    text-align:center; background:var(--mustard); border-radius:32px;
+    border:2.5px solid var(--ink); padding:70px 30px; position:relative; overflow:hidden;
+  }
+  .cta-final h2{ font-size:clamp(1.8rem,3.6vw,2.6rem); max-width:600px; margin:0 auto; }
+  .cta-final p{ margin:16px auto 30px; max-width:460px; color:#3b3324; }
+
+  /* localização */
+  .loc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .loc-info .item{ display:flex; gap:14px; margin-top:20px; }
+  .loc-info .item .dot{
+    width:34px; height:34px; border-radius:50%; background:var(--coral); border:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .loc-info .item h4{ font-family:'Fredoka'; font-size:1rem; }
+  .loc-info .item p{ font-size:0.9rem; color:#565b51; }
+  .map-box{
+    height:320px; border-radius:24px; border:2.5px solid var(--ink);
+    background:linear-gradient(135deg, var(--turquoise), var(--forest));
+    display:flex; align-items:center; justify-content:center; color:var(--cream);
+    font-family:'Fredoka'; text-align:center; padding:20px;
+  }
+  @media (max-width:860px){ .loc-grid{ grid-template-columns:1fr; } }
+
+  /* footer */
+  footer{ background:var(--ink); color:var(--cream); padding:56px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
+  footer h4{ font-family:'Fredoka'; margin-bottom:14px; }
+  footer ul{ list-style:none; }
+  footer li{ margin-bottom:8px; font-size:0.9rem; opacity:0.8; }
+  .footer-bottom{
+    margin-top:40px; padding-top:22px; border-top:1px solid rgba(255,251,243,0.15);
+    font-size:0.8rem; opacity:0.65; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  @media (max-width:700px){ .footer-grid{ grid-template-columns:1fr; } }
+
+  /* whatsapp float */
+  .wa-float{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink);
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{ transform:scale(1.08) rotate(-6deg); }
+</style>
+</head>
+<body>
+
+<nav id="topo">
+  <div class="container nav-inner">
+    <a class="logo" href="#topo" aria-label="Voltar ao início">
+      <img class="logo-img" src="focinho-feliz-logo.png" alt="Focinho Feliz — logo">
+      Focinho <span>Feliz</span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#local">Onde estamos</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://wa.me/5511900000000" target="_blank" rel="noopener">Agendar no WhatsApp</a>
+      <button class="burger" aria-label="menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Banho · Tosa · Day Care · Pet Shop</span>
+      <h1>Todo pet merece um dia de <em>spa</em>.</h1>
+      <p class="lead">Cuidado de verdade para o seu melhor amigo, em Parelheiros. Da tosa na medida certa ao passeio da tarde — tudo pensado pra ele voltar pra casa mais feliz do que saiu.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="https://wa.me/5511900000000" target="_blank" rel="noopener">📅 Agendar banho e tosa</a>
+        <a class="btn" href="#servicos">Ver serviços</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>8 anos</strong><span>cuidando de pets no bairro</span></div>
+        <div><strong>3.200+</strong><span>banhos e tosas por ano</span></div>
+        <div><strong>4,9 ★</strong><span>avaliação dos tutores</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="blob-frame">
+        <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80" alt="Cachorro feliz após o banho na Focinho Feliz">
+      </div>
+      <div class="stamp">Aprovado<br>pelo focinho 🐾</div>
+      <div class="float-paw" style="top:8%; right:4%;">🐾</div>
+      <div class="float-paw" style="bottom:22%; left:-6%; animation-delay:1.4s;">🐾</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>🐶 Banho e tosa higiênica</span><span>·</span>
+    <span>🐱 Tosa na tesoura</span><span>·</span>
+    <span>🦴 Ração e petiscos premium</span><span>·</span>
+    <span>🚐 Leva e traz</span><span>·</span>
+    <span>🏥 Parceria veterinária</span><span>·</span>
+    <span>🐶 Banho e tosa higiênica</span><span>·</span>
+    <span>🐱 Tosa na tesoura</span><span>·</span>
+    <span>🦴 Ração e petiscos premium</span><span>·</span>
+    <span>🚐 Leva e traz</span><span>·</span>
+    <span>🏥 Parceria veterinária</span><span>·</span>
+  </div>
+</div>
+
+<section id="servicos">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow">O que fazemos</span>
+      <h2>Um cuidado pra cada tipo de focinho</h2>
+      <p>Serviços pensados pra cães e gatos de todos os portes e personalidades — do filhote elétrico ao idoso tranquilo.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="icon">🛁</div>
+        <h3>Banho</h3>
+        <p>Shampoo neutro ou específico pra pele sensível, secagem completa e perfume pet-friendly.</p>
+        <div class="price">a partir de R$ 45</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="icon">✂️</div>
+        <h3>Tosa</h3>
+        <p>Higiênica, na tesoura ou na máquina — sempre respeitando o ritmo do animal, sem pressa e sem sedação.</p>
+        <div class="price">a partir de R$ 60</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="icon">🏡</div>
+        <h3>Day care</h3>
+        <p>Diária de recreação supervisionada com outros pets, pátio coberto e monitoramento por câmera.</p>
+        <div class="price">a partir de R$ 55/dia</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="icon">🛒</div>
+        <h3>Pet shop</h3>
+        <p>Ração, petiscos, brinquedos e itens de higiene das marcas que os tutores mais confiam.</p>
+        <div class="price">consulte no balcão</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" style="background:#F3EBDA;">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Passo a passo</span>
+      <h2>Do agendamento ao "au au" de despedida</h2>
+    </div>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="n">1</div>
+        <h3>Agenda pelo WhatsApp</h3>
+        <p>Conta pra gente o porte, a idade e a manha do seu pet — a gente já sugere o serviço ideal.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="n">2</div>
+        <h3>Buscamos ou você traz</h3>
+        <p>Serviço de leva e traz disponível na região, ou você passa direto na loja em Parelheiros.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="n">3</div>
+        <h3>Foto e recado no fim</h3>
+        <p>Você recebe uma foto do resultado e um relatório rápido de como foi o dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Galeria</span>
+      <h2>Clientes satisfeitos (e peludos)</h2>
+    </div>
+    <div class="gallery-strip fade-up">
+      <a href="#"><img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" alt="Cachorro tosado"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80" alt="Gato após banho"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=500&q=80" alt="Cachorro brincando no day care"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1517849845537-4d257902861a?auto=format&fit=crop&w=500&q=80" alt="Filhote sendo cuidado"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1520087619250-584c0cbd35e8?auto=format&fit=crop&w=500&q=80" alt="Cachorro feliz na loja"></a>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos">
+  <div class="container testi-wrap fade-up">
+    <div class="section-head" style="max-width:520px;">
+      <span class="eyebrow" style="background:var(--turquoise); color:var(--cream);">Depoimentos</span>
+      <h2 style="color:var(--cream);">O que os tutores dizem</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"O Bento sai de lá parecendo outro cachorro, e sem stress nenhum. Time super atencioso."</p>
+        <div class="who">Marina C. — tutora do Bento</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"O leva e traz salvou minha rotina. Minha gata voltou tranquila, coisa rara pra ela."</p>
+        <div class="who">Renato A. — tutor da Mel</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Preço justo, ambiente limpo e o day care deixou meu filhote bem mais sociável."</p>
+        <div class="who">Juliana P. — tutora do Thor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta-final fade-up">
+      <span class="eyebrow" style="background:var(--cream);">Vamos marcar?</span>
+      <h2>Seu pet já pode ter horário marcado pra essa semana</h2>
+      <p>Responde rapidinho no WhatsApp e a gente encaixa o melhor horário pra vocês dois.</p>
+      <a class="btn btn-dark" href="https://wa.me/5511900000000" target="_blank" rel="noopener">📲 Chamar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="local" style="background:#F3EBDA;">
+  <div class="container loc-grid">
+    <div class="loc-info fade-up">
+      <span class="eyebrow">Onde estamos</span>
+      <h2 style="margin-top:14px;">Parelheiros, São Paulo</h2>
+      <div class="item">
+        <div class="dot">📍</div>
+        <div><h4>Endereço</h4><p>Rua das Acácias, 245 — Parelheiros, São Paulo/SP</p></div>
+      </div>
+      <div class="item">
+        <div class="dot">🕒</div>
+        <div><h4>Horário</h4><p>Seg. a sáb., das 8h às 18h</p></div>
+      </div>
+      <div class="item">
+        <div class="dot">📞</div>
+        <div><h4>Contato</h4><p>(11) 90000-0000 · foco em WhatsApp</p></div>
+      </div>
+    </div>
+    <div class="map-box fade-up">
+      <div>🗺️<br><br>Mapa de exemplo — substituir por embed real do Google Maps</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a class="logo" href="#topo" style="color:var(--cream);">
+        <img class="logo-img" src="focinho-feliz-logo.png" alt="Focinho Feliz — logo">
+        Focinho <span>Feliz</span>
+      </a>
+      <p style="margin-top:14px; font-size:0.88rem; opacity:0.75; max-width:280px;">Pet shop, banho, tosa e day care em Parelheiros. Site modelo de teste — informações fictícias.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#local">Onde estamos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>(11) 90000-0000</li>
+        <li>contato@focinhofeliz.com.br</li>
+        <li>Rua das Acácias, 245 — Parelheiros/SP</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Focinho Feliz Pet Shop — site modelo de teste.</span>
+    <span>Feito com 🐾 por Webfyn</span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5511900000000" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">💬</a>
+
+<script>
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '64px';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = 'var(--cream)';
+    navLinks.style.padding = '20px 24px';
+    navLinks.style.borderBottom = '2.5px solid var(--ink)';
+    navLinks.style.gap = '18px';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
